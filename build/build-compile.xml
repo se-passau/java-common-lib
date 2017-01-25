@@ -13,11 +13,6 @@
     <property name="class.format" value="1.8"/>
     <property name="class.dir" value="bin"/>
 
-    <path id="errorprone">
-        <pathelement location="${ivy.lib.dir}/build/error_prone_ant.jar"/>
-    </path>
-
-    <!-- We use error-prone as the compiler, cf. http://errorprone.info/ -->
     <target name="build-project" depends="build-dependencies">
         <depend srcdir="${source.dir}" destdir="${class.dir}"/>
         <mkdir dir="${source.generated.dir}"/>
@@ -27,7 +22,6 @@
                source="${source.format}"
                target="${class.format}"
                includeAntRuntime="false"
-               compiler="com.google.errorprone.ErrorProneAntCompilerAdapter"
                encoding="UTF-8">
             <src path="${source.dir}"/>
             <classpath refid="classpath"/>
@@ -35,7 +29,6 @@
             <compilerarg value="-Xlint:-processing"/>
             <compilerarg value="-Werror"/>
             <compilerarg value="-s"/><compilerarg value="${source.generated.dir}"/>
-            <compilerclasspath refid="errorprone"/>
         </javac>
     </target>
 
